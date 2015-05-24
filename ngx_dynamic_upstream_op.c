@@ -357,6 +357,8 @@ ngx_dynamic_upstream_op_remove(ngx_http_request_t *r, ngx_dynamic_upstream_op_t 
     }
 
     /* released removed peer */
+    ngx_slab_free_locked(shpool, target->name.data);
+    ngx_slab_free_locked(shpool, target->sockaddr);
     ngx_slab_free_locked(shpool, target);
 
     /* found head */
